@@ -14,7 +14,7 @@ var uiConfig = {
     },
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: 'https://arenatroll-91061.web.app/',
+    signInSuccessUrl: false,
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID
     ],
@@ -30,19 +30,14 @@ ui.start('#firebaseui-auth-container', uiConfig);
 // Create a Google authentication provider instance
 var provider = new firebase.auth.GoogleAuthProvider();
 
-firebase.auth().signInWithRedirect(provider);
-
 firebase.auth()
-  .getRedirectResult()
+  .signInWithPopup(provider)
   .then((result) => {
-    if (result.credential) {
-      /** @type {firebase.auth.OAuthCredential} */
-      var credential = result.credential;
+    /** @type {firebase.auth.OAuthCredential} */
+    var credential = result.credential;
 
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = credential.accessToken;
-      // ...
-    }
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = credential.accessToken;
     // The signed-in user info.
     var user = result.user;
     // IdP data available in result.additionalUserInfo.profile.
