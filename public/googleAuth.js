@@ -16,11 +16,10 @@ var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: 'https://arenatroll-91061.web.app/',
     signInOptions: [
-      // Leave the lines as is for the providers you want to offer your users.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID
     ],
     // Terms of service url.
-    tosUrl: 'https://arenatroll-91061.web.app/',
+    tosUrl: '<input-tod-url>',
     // Privacy policy url.
     privacyPolicyUrl: '<your-privacy-policy-url>'
     };
@@ -31,33 +30,30 @@ ui.start('#firebaseui-auth-container', uiConfig);
 // Create a Google authentication provider instance
 var provider = new firebase.auth.GoogleAuthProvider();
 
-firebase.auth()
-  .signInWithPopup(provider)
-  .then((result) => {
-    /** @type {firebase.auth.OAuthCredential} */
-    var credential = result.credential;
+firebase.auth().signInWithRedirect(provider);
 
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    var token = credential.accessToken;
-    
+firebase.auth()
+  .getRedirectResult()
+  .then((result) => {
+    if (result.credential) {
+      /** @type {firebase.auth.OAuthCredential} */
+      var credential = result.credential;
+
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = credential.accessToken;
+      // ...
+    }
     // The signed-in user info.
     var user = result.user;
-    
     // IdP data available in result.additionalUserInfo.profile.
-    // ...
-
-    // Handle the signed-in user or perform additional tasks.
-  })
-  .catch((error) => {
+      // ...
+  }).catch((error) => {
     // Handle Errors here.
     var errorCode = error.code;
     var errorMessage = error.message;
-    
     // The email of the user's account used.
     var email = error.email;
-    
     // The firebase.auth.AuthCredential type that was used.
     var credential = error.credential;
-    
-    // Handle the error or display an error message to the user.
+    // ...
   });
