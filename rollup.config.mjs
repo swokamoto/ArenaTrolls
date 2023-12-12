@@ -1,7 +1,8 @@
 export default {
-    input: 'src/main.js',
+    input: 'public/googleAuthConfig.js',
     output: {
-        file: 'dist/bundle.js',
-        format: 'cjs'
-    }
-};
+      file: 'public/googleAuthConfig.mjs',
+      format: 'iife',
+    },
+  };
+  
