@@ -4,8 +4,9 @@
     "description": "A package for ArenaTrolls",
     "main": "index.js",
     "scripts": {
-        "build": "rollup -c"
+        "build": "rollup -c rollup.config.mjs"
     },
+    "type": "module",
     "author": "Scott Okamoto",
     "license": "MIT"
 }
