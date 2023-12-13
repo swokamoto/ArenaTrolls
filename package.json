@@ -8,6 +8,9 @@
     },
     "type": "module",
     "author": "Scott Okamoto",
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "firebase": "13.0.1"
+    }
 }
   
