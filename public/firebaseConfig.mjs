@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -16,6 +16,35 @@ const firebaseConfig = {
   measurementId: "G-4EQDGZ3VWX"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// Wait for Firebase to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+
+  // Get Auth instance
+  const auth = getAuth(app);
+
+  // Create Google Auth provider
+  const googleAuthProvider = new GoogleAuthProvider();
+
+  // Event listener for a button click or any user interaction triggering the sign-in process
+  const signInButton = document.getElementById('signInButton');
+  signInButton.addEventListener('click', () => {
+    // Create a Google authentication provider instance
+    const provider = new GoogleAuthProvider();
+
+    // Sign in with the Google provider using a popup
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // User signed in successfully
+        const user = result.user;
+        console.log('Signed in user:', user);
+      })
+      .catch((error) => {
+        // Handle errors
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(`Sign-in error (${errorCode}): ${errorMessage}`);
+      });
+  });
+});

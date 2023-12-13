@@ -3,11 +3,11 @@
     "version": "1.0.0",
     "description": "A package for ArenaTrolls",
     "main": "index.js",
+    "type": "module",
     "scripts": {
         "build": "npx rollup -c rollup.config.mjs",
         "start": "node --experimental-modules firebaseConfig.mjs"
     },
-    "type": "module",
     "author": "Scott Okamoto",
     "license": "MIT",
     "dependencies": {
