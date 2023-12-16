@@ -1,13 +1,8 @@
 {
-    "name": "ArenaTrolls",
+    "name": "arenatrolls",
     "version": "1.0.0",
     "description": "A package for ArenaTrolls",
-    "main": "index.js",
-    "type": "module",
-    "scripts": {
-        "build": "npx rollup -c rollup.config.mjs",
-        "start": "node firebaseConfig.js"
-    },
+    "main": "index.html",
     "author": "Scott Okamoto",
     "license": "MIT",
     "dependencies": {
