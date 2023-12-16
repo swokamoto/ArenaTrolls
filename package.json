@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "description": "A package for ArenaTrolls",
     "main": "index.html",
+    "scripts": {
+        "build": "npm run build"
+      },
     "author": "Scott Okamoto",
     "license": "MIT",
     "dependencies": {
