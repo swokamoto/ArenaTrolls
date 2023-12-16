@@ -1,12 +1,7 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCNsSgu75foPXFVGUqPveByREhL6ymf68I",
   authDomain: "arenatroll-91061.firebaseapp.com",
@@ -17,35 +12,28 @@ const firebaseConfig = {
   measurementId: "G-4EQDGZ3VWX"
 };
 
-// Wait for Firebase to be fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-  // Get Auth instance
-  const auth = getAuth(app);
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
-  // Create Google Auth provider
-  const googleAuthProvider = new GoogleAuthProvider();
-
-  // Event listener for a button click or any user interaction triggering the sign-in process
-  const signInButton = document.getElementById('signInButton');
-  signInButton.addEventListener('click', () => {
-    // Create a Google authentication provider instance
-    const provider = new GoogleAuthProvider();
-
-    // Sign in with the Google provider using a popup
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // User signed in successfully
-        const user = result.user;
-        console.log('Signed in user:', user);
-      })
-      .catch((error) => {
-        // Handle errors
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.error(`Sign-in error (${errorCode}): ${errorMessage}`);
-      });
+const auth = getAuth(app);
+signInWithPopup(auth, provider)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.customData.email;
+    // The AuthCredential type that was used.
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    // ...
   });
-});
