@@ -3,13 +3,13 @@
     "version": "1.0.0",
     "description": "A package for ArenaTrolls",
     "main": "index.html",
+    "type": "module",
     "scripts": {
-        "build": "npm run build"
-      },
+        "build": "rollup -c"
+    },
     "author": "Scott Okamoto",
     "license": "MIT",
     "dependencies": {
-        "firebase": "latest"
+        "firebase": "^10.7.1"
     }
 }
-  
